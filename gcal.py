@@ -14,14 +14,17 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 def filter(events: list) -> list:
     in_a_week = []
-    week = datetime.datetime.now() + datetime.timedelta(days=7)
+    week = datetime.datetime.now() + datetime.timedelta(days=2)
     for i in events:
         i = i.split(" ")[0]
         i = datetime.datetime.strptime(i, "%Y-%m-%d")
         if i < week:
+            i = str(i).replace("00:00:00", "")
             in_a_week.append(i)
 
+    # HACK:
     events = events[:len(in_a_week)]
+    events = [str(i).replace("00:00:00", "") for i in events]
 
     return events
 

@@ -11,7 +11,7 @@ def get_weather(api_key: str, lat: float, lon: float) -> list[str]:
     for i in response['daily']:
         ts = i['dt']
         date = datetime.utcfromtimestamp(ts).strftime('%a %b %d')
-        final = f"The temp for {date} is: {i['temp']['day']}, with a low of {i['temp']['min']}, and a high of {i['temp']['max']}"
+        final = f"{date}: {i['temp']['day']}, low: {i['temp']['min']}, high: {i['temp']['max']}"
         week_weather.append(final)
 
 

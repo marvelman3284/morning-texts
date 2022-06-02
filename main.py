@@ -21,17 +21,18 @@ def text() -> None:
     events = "\n".join(events)
     week_weather = weather.get_weather(conf['API']['key'], conf['API']['lat'], conf['API']['lon'])
 
-    week_weather = "\n".join(week_weather)
+    week_weather = week_weather[0]
 
-    message = f"This week you have:\n{events}. \n{week_weather}"
+    message = f"Upcoming you have:\n{events}.\nToday's weather is: \n{week_weather}"
 
     print(message)
 
-    # resp = requests.post('https://textbelt.com/text', {
-    #   'phone': conf['Message']['number'],
-    #   'message': message,
-    #   'key': 'textbelt',
-    # })
-    # print(resp.json())
+    
+    resp = requests.post('https://textbelt.com/text', {
+        'phone': conf['Message']['number'],
+        'message': message,
+        'key': 'textbelt',
+    })
+    print(resp.json())
 
 text()
